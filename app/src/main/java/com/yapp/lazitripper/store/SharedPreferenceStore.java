@@ -11,6 +11,8 @@ import java.lang.reflect.Type;
 
 /**
  * Created by ohdok on 2017-02-25.
+ *
+ * sharePreference를 다양한 오브젝트로 저장하고 가져올 수 있게 만들어 놓은 클래스
  */
 
 public class SharedPreferenceStore<T> {

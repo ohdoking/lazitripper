@@ -34,6 +34,24 @@ public interface LaziTripperKoreanTourService {
             @Query("MobileApp") String MobileApp);
 
     /*
+        지역 코드 정보(상세 지역 코드)
+
+        numOfRows	한 페이지 결과 수	10		한 페이지 결과 수
+        pageNo	페이지 번호	1		현재 페이지 번호
+        MobileOS	OS 구분	ETC	필수	IOS (아이폰), AND (안드로이드),
+        WIN (윈도우폰), ETC
+        MobileApp	서비스명		필수	서비스명=어플명
+        areaCode	지역코드			지역코드, 시군구코드
+    */
+    @GET("rest/KorService/areaCode")
+    Call<CommonResponse<RegionCodeDto>> getRelionInfo(
+            @Query("numOfRows") Integer numOfRows,
+            @Query("pageNo") Integer pageNo,
+            @Query("MobileOS") String MobileOS,
+            @Query("areaCode") Integer areaCode,
+            @Query("MobileApp") String MobileApp);
+
+    /*
 
         서비스 분류 코드 조회
 
@@ -62,7 +80,7 @@ public interface LaziTripperKoreanTourService {
             @Query("cat3") String cat3);
 
     /*
-        도시 기준으로 장소 정보 제공
+        도시 기준으로 장소 정보 제공(시 단위)
 
         numOfRows	한 페이지 결과 수	10		한 페이지 결과 수
         pageNo	페이지 번호	1		현재 페이지 번호
@@ -89,6 +107,37 @@ public interface LaziTripperKoreanTourService {
             @Query("MobileOS") String MobileOS,
             @Query("MobileApp") String MobileApp,
             @Query("areaCode") Integer areaCode,
+            @Query("contentTypeId") Integer contentTypeId);
+
+    /*
+        도시 기준으로 장소 정보 제공(도 단위)
+
+        numOfRows	한 페이지 결과 수	10		한 페이지 결과 수
+        pageNo	페이지 번호	1		현재 페이지 번호
+        arrange	정렬 구분	A		(A=제목순, B=조회순, C=수정일순, D=생성일순)
+        대표이미지 정렬 추가 (O=제목순, P=조회순, Q=수정일순, R=생성일순)
+        listYN	목록 구분	Y		목록 구분 (Y=목록, N=개수)
+        MobileOS	OS 구분	ETC	필수
+            IOS (아이폰), AND (안드로이드),
+        WIN (윈도우폰), ETC
+        MobileApp	서비스명		필수	서비스명=어플명
+        contentTypeId	관광타입 ID			관광타입(관광지, 숙박 등) ID
+        areaCode	지역코드			지역코드
+        sigunguCode	시군구코드		areaCode	시군구코드
+        cat1	대분류			대분류 코드
+        cat2	중분류		cat1	중분류 코드
+        cat3	소분류		cat1, cat2	소분류 코드
+    */
+    @GET("rest/KorService/areaBasedList")
+    Call<CommonResponse<PlaceInfoDto>> getPlaceInfoByCity(
+            @Query("numOfRows") Integer numOfRows,
+            @Query("pageNo") Integer pageNo,
+            @Query("arrange") String arrange,
+            @Query("listYN") String listYN,
+            @Query("MobileOS") String MobileOS,
+            @Query("MobileApp") String MobileApp,
+            @Query("areaCode") Integer areaCode,
+            @Query("sigunguCode") Integer sigunguCode,
             @Query("contentTypeId") Integer contentTypeId);
 
     /*
